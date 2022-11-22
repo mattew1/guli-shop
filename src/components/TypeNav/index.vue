@@ -139,7 +139,7 @@ export default {
   },
   async mounted() {
     await this.getCategoryList();
-    console.log(this.categoryList);
+    // console.log(this.categoryList);
     // 用于挂载后 如果当前路由路径的判断
     if (this.$route.path !== "/") {
       this.isShow = false;
