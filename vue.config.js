@@ -14,8 +14,9 @@ module.exports = defineConfig({
         target: "http://sph-h5-api.atguigu.cn/api", // 被替换的目标地址
         ws: true, // 表示是否代理websockets
         changeOrigin: true, //是否需要跨域
-        pathWrite: {
-          "^/api": "", // 路径重写
+        pathRewrite: {
+          // 路径重写
+          "^/api": "",
         },
       },
     },

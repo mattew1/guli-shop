@@ -13,8 +13,8 @@
             <!-- 声明式路由跳转 -->
             <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">免费注册</router-link>
-            <router-link to="/search/10">10</router-link>
-            <router-link to="/search/20">20</router-link>
+            <!-- <router-link to="/search/10">10</router-link>
+            <router-link to="/search/20">20</router-link> -->
           </p>
         </div>
         <div class="typeList">
