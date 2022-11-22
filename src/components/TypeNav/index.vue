@@ -102,7 +102,7 @@ export default {
     // 鼠标移入 使用lodash 的防抖函数
     moveIn: debounce(function (index) {
       this.currentIndex = index;
-    }, 150),
+    }, 100),
     // 鼠标移出
     moveDivOut() {
       this.currentIndex = -1; //设置默认值
@@ -130,9 +130,13 @@ export default {
         }
 
         const location = {
-          path: "/search",
+          path: "search",
           query,
         };
+
+        if (this.$route.params) {
+          location.params = this.$route.params;
+        }
         this.$router.push(location);
       }
     },

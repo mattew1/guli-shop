@@ -3,7 +3,7 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css"; //引入样式
 
 const instance = axios.create({
-  baseURL: "/api",
+  baseURL: "/mock",
   timeout: 10000, //超时时间
 });
 
