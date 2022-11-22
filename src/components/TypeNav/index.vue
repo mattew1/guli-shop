@@ -153,7 +153,6 @@ export default {
 <style lang="less" scoped>
 .type-nav {
   border-bottom: 2px solid #e1251b;
-
   .container {
     width: 1200px;
     margin: 0 auto;
