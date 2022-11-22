@@ -22,7 +22,7 @@ const actions = {
   },
 };
 // 异步操作  dispatch 触发 ， 提交到mutations 不能直接状态
-const modules = {};
+// const modules = {};
 // store分割成模块
 
 export default {

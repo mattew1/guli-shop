@@ -98,7 +98,6 @@ export default {
         },
         hash: "#abc",
       });
-      // 用success、error、catch进行重复路由导航出错的处理，好还是不好？不好！
 
       // 4.props属性的映射
     },

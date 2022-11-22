@@ -4,6 +4,7 @@ import router from "./router"; //引入理由入口
 import store from "./store"; //引入状态管理
 import TypeNav from "@/components/TypeNav";
 
+Vue.component("TypeNav", TypeNav); // 全局组件注册
 Vue.config.productionTip = false; //用于阻止vue在启动是生成生产提示
 
 const a = new Vue({

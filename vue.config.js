@@ -4,16 +4,16 @@ module.exports = defineConfig({
   // lintOnSave:false, // 进行保存代码时不进行校验
 
   devServer: {
-    host: "localhost",
-    port: 8080,
-    open: true,
+    // host: "localhost",
+    // port: 8080,
+    // open: true,
     //配置自动打开浏览器 端口号为8080
     // 配置代理服务器
     proxy: {
       "^/api": {
-        target: "http://sph-h5-api/atguigu.cn/api",// 被替换的目标地址
+        target: "http://sph-h5-api.atguigu.cn/api", // 被替换的目标地址
         ws: true, // 表示是否代理websockets
-        changeOrigin: true,//是否需要跨域
+        changeOrigin: true, //是否需要跨域
         pathWrite: {
           "^/api": "", // 路径重写
         },
@@ -21,7 +21,6 @@ module.exports = defineConfig({
     },
   },
 });
-
 
 // target：要使用url模块解析的url字符串
 // forward：要使用url模块解析的url字符串

@@ -20,9 +20,9 @@ VueRouter.prototype.push = function push(location, resolve, reject) {
 
 VueRouter.prototype.replace = function replace(location, resolve, reject) {
   if (resolve === undefined && reject === undefined) {
-    return originalPush.call(this, location).catch(() => {});
+    return originalReplace.call(this, location).catch(() => {});
   } else {
-    return originalPush.call(this, location, resolve, reject);
+    return originalReplace.call(this, location, resolve, reject);
   }
 };
 
@@ -47,6 +47,12 @@ const routes = [
     path: "/search/:keyword?", //:占位符  ? 表示可传可不传
     name: "search",
     component: Search,
+    props: (route) => ({
+      keyword: route.params.keyword,
+      keyword1: route.query.keyword1,
+      a: 1,
+      b: "abc",
+    }),
   },
   {
     path: "/register",

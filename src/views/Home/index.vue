@@ -1,20 +1,19 @@
 <template>
-  <div class="outer">
-    <Header />
-    <router-view />
-    <Footer v-if="!$route.meta.isHidden" />
+  <div>
+    <TypeNav />
+    <ListContainer />
+    <Recommend />
   </div>
 </template>
-
 <script>
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import ListContainer from "./components/ListContainer";
+import Recommend from "./components/Recommend";
 export default {
-  name: "App",
+  name: "Home",
   props: {},
   components: {
-    Header,
-    Footer,
+    ListContainer,
+    Recommend,
   },
   data() {
     return {};

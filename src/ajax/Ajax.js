@@ -8,26 +8,26 @@ const instance = axios.create({
 });
 
 // 请求拦截
-instance.interceptors.request.use({
-  function(config) {
+instance.interceptors.request.use(
+  function (config) {
     NProgress.start();
     return config;
   },
-  function(err) {
+  function (err) {
     return Promise.reject(err);
-  },
-});
+  }
+);
 
 //响应拦截
-instance.interceptors.response.use({
-  function(response) {
+instance.interceptors.response.use(
+  function (response) {
     NProgress.done();
     return response.data;
   },
-  function(error) {
+  function (error) {
     NProgress.done();
     return Promise.reject(error);
-  },
-});
+  }
+);
 
 export default instance;
