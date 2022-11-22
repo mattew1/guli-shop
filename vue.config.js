@@ -4,9 +4,9 @@ module.exports = defineConfig({
   // lintOnSave:false, // 进行保存代码时不进行校验
 
   devServer: {
-    // host: "localhost",
-    // port: 8080,
-    // open: true,
+    host: "localhost",
+    port: 8080,
+    open: true,
     //配置自动打开浏览器 端口号为8080
     // 配置代理服务器
     proxy: {

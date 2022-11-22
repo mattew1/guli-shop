@@ -31,7 +31,7 @@ Vue.use(VueRouter);
 // 静态路由表
 const routes = [
   {
-    name: "home",
+    name: "/",
     path: "/",
     component: Home,
   },
