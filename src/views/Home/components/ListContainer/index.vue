@@ -12,7 +12,7 @@
             >
               <img :src="banner.imageUrl" />
             </div>
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <img src="./images/banner1.jpg" />
             </div>
             <div class="swiper-slide">
@@ -23,7 +23,7 @@
             </div>
             <div class="swiper-slide">
               <img src="./images/banner4.jpg" />
-            </div>
+            </div> -->
           </div>
           <!-- 如果需要分页器 -->
           <div class="swiper-pagination"></div>
@@ -108,7 +108,7 @@
 
 <script>
 // 按需引入 mapGetters
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 // 引入 swiper
 import Swiper from "swiper";
 import "swiper/css/swiper.min.css";
@@ -122,21 +122,46 @@ export default {
       this.$store.dispatch("getBannerList");
     },
   },
+  //用于监听数据变化
+
+  watch: {
+    // 光数据请求并且重绘完不代表重绘以后的DOM已经加载完
+    // @ 数据与DOM之间的关系
+    // @ 1.需要先进行数据的请求，请求到数据以后需要进行界面的重绘
+    // @ 2.数据进行界面的重绘需要一定的时间，就算重绘了，也不代表DOM已经加载完
+    // @ 3.对于需要进行DOM对象操作的过程，需要确保的是DOM的加载完成，而不仅仅是数据的请求完成以及数据的重绘完成
+    banners: {
+      handler(newVal, oldVal) {
+        this.$nextTick(() => {
+          new Swiper(".swiper-container", {
+            pagination: {
+              el: ".swiper-pagination",
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+          });
+        });
+      },
+    },
+  },
+
   async mounted() {
-    await this.getBannerList();
+    await this.getBannerList(); //保证数据已经请求 但是不保证数据请求成功后重绘成功
 
     //设置异步
-    setTimeout(() => {
-      new Swiper(".swiper-container", {
-        pagination: {
-          el: ".swiper-pagination",
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    }, 200);
+    // setTimeout(() => {
+    //   new Swiper(".swiper-container", {
+    //     pagination: {
+    //       el: ".swiper-pagination",
+    //     },
+    //     navigation: {
+    //       nextEl: ".swiper-button-next",
+    //       prevEl: ".swiper-button-prev",
+    //     },
+    //   });
+    // }, 200);
   },
 };
 </script>

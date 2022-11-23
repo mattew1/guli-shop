@@ -9,7 +9,7 @@ const state = {
 //唯一数据源 设置状态
 
 const getters = {
-  banner(state) {
+  banners(state) {
     return state.bannerList;
   },
 };
