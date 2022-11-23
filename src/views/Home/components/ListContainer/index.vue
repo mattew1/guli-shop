@@ -13,6 +13,9 @@
               <img :src="banner.imageUrl" />
             </div>
             <div class="swiper-slide">
+              <img src="./images/banner1.jpg" />
+            </div>
+            <div class="swiper-slide">
               <img src="./images/banner2.jpg" />
             </div>
             <div class="swiper-slide">
@@ -104,7 +107,11 @@
 </template>
 
 <script>
+// 按需引入 mapGetters
 import { mapGetters } from "vuex";
+// 引入 swiper
+import Swiper from "swiper";
+import "swiper/css/swiper.min.css";
 export default {
   name: "ListContainer",
   computed: {
@@ -117,6 +124,19 @@ export default {
   },
   async mounted() {
     await this.getBannerList();
+
+    //设置异步
+    setTimeout(() => {
+      new Swiper(".swiper-container", {
+        pagination: {
+          el: ".swiper-pagination",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    }, 200);
   },
 };
 </script>

@@ -9,6 +9,7 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { mapActions } from "vuex";
 export default {
   name: "App",
   props: {},
@@ -20,9 +21,15 @@ export default {
     return {};
   },
   watch: {},
-  methods: {},
+  methods: {
+    ...mapActions(["getCategoryList"]),
+  },
   computed: {},
-  mounted() {},
+  mounted() {
+    this.getCategoryList().then((res) => {
+      console.log(res);
+    });
+  },
 };
 </script>
 <style scoped lang="less"></style>

@@ -8,6 +8,7 @@ Vue.component("TypeNav", TypeNav); // 全局组件注册
 Vue.config.productionTip = false; //用于阻止vue在启动是生成生产提示
 
 import "@/mock/mockServer";
+
 const a = new Vue({
   router,
   store,
