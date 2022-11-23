@@ -5,7 +5,7 @@
         <!--banner轮播-->
         <div class="swiper-container" id="mySwiper">
           <div class="swiper-wrapper">
-            <!-- <div
+            <div
               class="swiper-slide"
               v-for="banner in banners"
               :key="banner.id"
@@ -17,7 +17,7 @@
             </div>
             <div class="swiper-slide">
               <img src="./images/banner3.jpg" />
-            </div> -->
+            </div>
             <div class="swiper-slide">
               <img src="./images/banner4.jpg" />
             </div>

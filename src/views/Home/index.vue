@@ -4,7 +4,6 @@
     <ListContainer />
     <Recommend />
     <Rank />
-
     <Floor v-for="floor in floorList" :key="floor.id" :floor="floor" />
     <Like />
     <Brand />
