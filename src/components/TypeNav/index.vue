@@ -3,12 +3,12 @@
   <div class="type-nav">
     <div class="container">
       <div @mouseleave="moveDivOut" @mouseenter="isShow = true">
-        <!-- 用于鼠标移出 移入方法 -->
         <h2 class="all">全部商品分类</h2>
-        <transition name="sort ">
-          <!-- 用于过渡样式 -->
+        <transition name="sort">
           <div class="sort" v-show="isShow">
             <div class="all-sort-list2" @click="toSearch">
+              <!-- // TODO: 对一级分类进行样式改写，需要采用vue动态样式绑定操作 -->
+              <!-- // =、==、=== 它们的差异与区别是什么？ -->
               <div
                 class="item"
                 v-for="(c1, index) in categoryList"
@@ -17,15 +17,13 @@
                 @mouseenter="moveIn(index)"
               >
                 <h3>
-                  <!-- data-* 表示 html 自定义属性，可以将自定义/存储的数据拿出来在js做进一步使用 
-                        并且不会覆盖html的原有属性 
-                      2- data-*   属性名不应该包含任何大写字母  
-                    
-                  -->
+                  <!-- // ! router-link是什么？是vue-router路由当中的自定义组件 -->
+                  <!-- // ! 如果使用router-link进行三级分类的路由跳转，将会产生极大的性能开销，是因为我们进行了大量的自定义组件的渲染 -->
+                  <!-- // ! 利用a标签+事件监听，减少自定义组件的渲染，因为a标签是原生HTML元素，它的渲染速度要远远快于自定义组件 -->
                   <a
                     href="javascript:;"
-                    :data-categoryname="c1.categoryName"
-                    :data-category1id="c1.categoryId"
+                    :data-categoryName="c1.categoryName"
+                    :data-category1Id="c1.categoryId"
                     >{{ c1.categoryName }}</a
                   >
                 </h3>
@@ -39,8 +37,8 @@
                       <dt>
                         <a
                           href="javascript:;"
-                          :data-categoryname="c2.categoryName"
-                          :data-category2id="c2.categoryId"
+                          :data-categoryName="c2.categoryName"
+                          :data-category2Id="c2.categoryId"
                           >{{ c2.categoryName }}</a
                         >
                       </dt>
@@ -48,8 +46,8 @@
                         <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
                           <a
                             href="javascript:;"
-                            :data-categoryname="c3.categoryName"
-                            :data-category3id="c3.categoryId"
+                            :data-categoryName="c3.categoryName"
+                            :data-category3Id="c3.categoryId"
                             >{{ c3.categoryName }}</a
                           >
                         </em>
@@ -97,29 +95,28 @@ export default {
     }),
   },
   methods: {
-    getCategoryList() {
-      this.$store.dispatch("getCategoryList");
-    },
+    // getCategoryList() {
+    //   this.$store.dispatch("getCategoryList");
+    // },
 
     // 鼠标移入 使用lodash 的防抖函数
     moveIn: debounce(function (index) {
       this.currentIndex = index;
     }, 100),
     // 鼠标移出
-    moveDivOut() {
-      this.currentIndex = -1; //设置默认值
-      if (this.$route.path !== "/") {
-        this.isShow = false;
-      }
-    },
+
     //toSearch
     toSearch() {
-      //this指向实例对象 Vuecomponent
-      // 事件都有一个默认事件对象 event
+      // this是指向实例对象VueComponent
+      // !事件都会有一个默认事件对象叫event
+      // 现在应用的是事件冒泡，event.target是用户点击的a标签元素
+      // data-*中的*在获取的时候将全部变成小写
       const { categoryname, category1id, category2id, category3id } =
         event.target.dataset;
 
+      // 之前使用的是查询参数?categoryName=xxx&category1Id=xxx&category2Id=xxx&category3Id=xxx
       if (categoryname) {
+        // const是常量设置，类型是对象
         const query = {
           categoryName: categoryname,
         };
@@ -131,20 +128,29 @@ export default {
           query.category3Id = category3id;
         }
 
+        // ! path与params是不能同时使用，万能路由跳转使用命名路由
         const location = {
-          path: "search",
+          name: "search",
           query,
         };
-
         if (this.$route.params) {
           location.params = this.$route.params;
         }
+
         this.$router.push(location);
       }
     },
+
+    moveDivOut() {
+      this.currentIndex = -1; //设置默认值
+      if (this.$route.path !== "/") {
+        this.isShow = false;
+      }
+    },
   },
+
   async mounted() {
-    await this.getCategoryList();
+    // await this.getCategoryList();
     // console.log(this.categoryList);
     // 用于挂载后 如果当前路由路径的判断
     if (this.$route.path !== "/") {
