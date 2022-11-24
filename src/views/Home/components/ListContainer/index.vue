@@ -3,35 +3,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" ref="bannerSwiper">
-          <div class="swiper-wrapper">
-            <div
-              class="swiper-slide"
-              v-for="banner in banners"
-              :key="banner.id"
-            >
-              <img :src="banner.imageUrl" />
-            </div>
-            <!-- <div class="swiper-slide">
-              <img src="./images/banner1.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner2.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner3.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="./images/banner4.jpg" />
-            </div> -->
-          </div>
-          <!-- 如果需要分页器 -->
-          <div class="swiper-pagination"></div>
-
-          <!-- 如果需要导航按钮 -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div>
+        <SlideLoop :bannerList="banners"></SlideLoop>
       </div>
       <div class="right">
         <div class="news">
@@ -111,7 +83,7 @@
 import { mapGetters, mapActions } from "vuex";
 // 引入 swiper
 import Swiper from "swiper";
-import "swiper/css/swiper.min.css";
+// import "swiper/css/swiper.min.css";
 export default {
   name: "ListContainer",
   computed: {
@@ -124,28 +96,29 @@ export default {
   },
   //用于监听数据变化
 
-  watch: {
-    // 光数据请求并且重绘完不代表重绘以后的DOM已经加载完
-    // @ 数据与DOM之间的关系
-    // @ 1.需要先进行数据的请求，请求到数据以后需要进行界面的重绘
-    // @ 2.数据进行界面的重绘需要一定的时间，就算重绘了，也不代表DOM已经加载完
-    // @ 3.对于需要进行DOM对象操作的过程，需要确保的是DOM的加载完成，而不仅仅是数据的请求完成以及数据的重绘完成
-    banners: {
-      handler(newVal, oldVal) {
-        this.$nextTick(() => {
-          new Swiper(this.$refs.bannerSwiper, {
-            pagination: {
-              el: ".swiper-pagination",
-            },
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-          });
-        });
-      },
-    },
-  },
+  // watch: {
+  //   // 光数据请求并且重绘完不代表重绘以后的DOM已经加载完
+  //   // @ 数据与DOM之间的关系
+  //   // @ 1.需要先进行数据的请求，请求到数据以后需要进行界面的重绘
+  //   // @ 2.数据进行界面的重绘需要一定的时间，就算重绘了，也不代表DOM已经加载完
+  //   // @ 3.对于需要进行DOM对象操作的过程，需要确保的是DOM的加载完成，而不仅仅是数据的请求完成以及数据的重绘完成
+  //   banners: {
+  //     immediate: true,
+  //     handler(newVal, oldVal) {
+  //       this.$nextTick(() => {
+  //         new Swiper(this.$refs.bannerSwiper, {
+  //           pagination: {
+  //             el: ".swiper-pagination",
+  //           },
+  //           navigation: {
+  //             nextEl: ".swiper-button-next",
+  //             prevEl: ".swiper-button-prev",
+  //           },
+  //         });
+  //       });
+  //     },
+  //   },
+  // },
 
   async mounted() {
     await this.getBannerList(); //保证数据已经请求 但是不保证数据请求成功后重绘成功

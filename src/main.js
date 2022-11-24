@@ -3,11 +3,17 @@ import App from "./App.vue"; // 引入App
 import router from "./router"; //引入理由入口
 import store from "./store"; //引入状态管理
 import TypeNav from "@/components/TypeNav";
+import SlideLoop from "@/components/SlideLoop";
 
 Vue.component("TypeNav", TypeNav); // 全局组件注册
+Vue.component(SlideLoop.name, SlideLoop); //全局组件注册
+
 Vue.config.productionTip = false; //用于阻止vue在启动是生成生产提示
 
-import "@/mock/mockServer";
+// 轮播图的解决方案 外部统一调用
+import Swiper from "swiper";
+import "swiper/css/swiper.min.css";
+import "@/mock/mockServer"; // vue项目会自动找到mock模拟数据服务 并启动它
 
 const a = new Vue({
   router,
