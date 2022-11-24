@@ -16,3 +16,12 @@ export const reqBannerList = () => {
 export const reqFloorList = () => {
   return mockAjax({ url: "/floor", method: "get" });
 };
+
+//对象是无序对象
+export const reqGoodsListInfo = (searchParams) => {
+  return Ajax({
+    url: "/list",
+    method: "get",
+    params: searchParams,
+  });
+};
