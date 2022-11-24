@@ -3,7 +3,7 @@
     <div class="sortList clearfix">
       <div class="center">
         <!--banner轮播-->
-        <div class="swiper-container" id="mySwiper">
+        <div class="swiper-container" ref="bannerSwiper">
           <div class="swiper-wrapper">
             <div
               class="swiper-slide"
@@ -133,7 +133,7 @@ export default {
     banners: {
       handler(newVal, oldVal) {
         this.$nextTick(() => {
-          new Swiper(".swiper-container", {
+          new Swiper(this.$refs.bannerSwiper, {
             pagination: {
               el: ".swiper-pagination",
             },

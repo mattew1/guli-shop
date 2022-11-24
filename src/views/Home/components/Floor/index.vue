@@ -25,7 +25,8 @@
               <img :src="floor.imgUrl" />
             </div>
             <div class="floorBanner">
-              <div class="swiper-container" id="floor1Swiper">
+              <!--  -->
+              <div class="swiper-container" ref="floorSwiper">
                 <div class="swiper-wrapper">
                   <div
                     class="swiper-slide"
@@ -73,9 +74,23 @@
 </template>
 
 <script>
+import Swiper from "swiper";
+import "swiper/css/swiper.min.css";
 export default {
   name: "Floor",
   props: ["floor"],
+  // 生命周期 挂载后
+  mounted() {
+    new Swiper(this.$refs.floorSwiper, {
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  },
 };
 </script>
 
