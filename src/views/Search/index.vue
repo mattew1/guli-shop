@@ -19,11 +19,13 @@
         </div>
 
         <!--selector-->
+        <!-- 搜索的选择项  一个是品牌 一个是商品的属性 -->
         <SearchSelector />
 
         <!--details-->
         <div class="details clearfix">
           <div class="sui-navbar">
+            <!-- 排序的功能操作 -->
             <div class="navbar-inner filter">
               <ul class="sui-nav">
                 <li class="active">
@@ -48,6 +50,7 @@
             </div>
           </div>
           <div class="goods-list">
+            <!-- 商品信息 -->
             <ul class="yui3-g">
               <li class="yui3-u-1-5">
                 <div class="list-wrap">
@@ -422,6 +425,7 @@
               </li>
             </ul>
           </div>
+          <!-- 分页操作  -->
           <div class="fr page">
             <div class="sui-pagination clearfix">
               <ul>
@@ -461,9 +465,35 @@
 import SearchSelector from "./SearchSelector/SearchSelector";
 export default {
   name: "Search",
-
+  data() {
+    //组件内的data是一个函数
+    return {
+      searchParams: {
+        category1Id: "",
+        category2Id: "",
+        category3Id: "",
+        keyword: "",
+        order: "1:desc",
+        pageNo: 1, //设置默认值为1
+        pageSize: 12, //设置默认页商品数量
+        props: [], //属性
+        trademark: "", //商标
+      },
+    };
+  },
   components: {
     SearchSelector,
+  },
+  methods: {
+    //方法
+    getGoodsListInfo() {
+      // dispatch('action方法'，变量)
+      this.$store.dispatch("getGoodsListInfo", this.searchParams);
+    },
+  },
+  mounted() {
+    //生命周期钩子函数 用于 挂载后
+    this.getGoodsListInfo();
   },
 };
 </script>
